@@ -1,0 +1,107 @@
+<div class="background">
+    <div class="pd-100">
+        <div class="card p-5 transpherency">
+            <form #registerForm="ngForm" >
+                <div class="text-center pb-5">
+                    <h3>Register</h3>
+                </div>
+            
+                <div *ngIf="registered">
+                    <div class="alert alert-success" role="alert">
+                        User Registered successfully. please <a routerLink="/auth/login" routerLinkActive="active" >Sign-in</a> to procceed!
+                    </div>
+                </div>
+
+                <div *ngIf="error">
+                    <div class="alert alert-danger" role="alert">
+                        Something went wrong!. please try again.
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example1">Email address</label>
+                    <input type="email" id="form2Example1" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" #email="ngModel" placeholder="Email" name="email" required ngModel email/> <!-- #email="ngModel"  -->
+                    <div *ngIf="email.touched" class="text-danger small">
+                        <div *ngIf="email.errors && email.errors['required']">This is a required field!</div>
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example2">Username</label>
+                    <input type="text" id="form2Example2" class="form-control" placeholder="Username"  name="username" #username="ngModel" required ngModel/> <!-- #username="ngModel" -->
+                    <div *ngIf="username.touched" class="text-danger small">
+                        <div *ngIf="username.errors && username.errors['required']">This is a required field!</div>
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example5">First Name</label>
+                    <input type="text" id="form2Example5" class="form-control" placeholder="First Name"  name="firstName" #firstName="ngModel"  required ngModel/> <!-- #firstName="ngModel" -->
+                    <div *ngIf="firstName.touched" class="text-danger small">
+                        <div *ngIf="firstName.errors && firstName.errors['required']">This is a required field!</div>
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example6">Last Name</label>
+                    <input type="text" id="form2Example6" class="form-control" placeholder="Last Name"  name="lastName" #lastName="ngModel" required ngModel /> <!-- #lastName="ngModel" -->
+                    <div *ngIf="lastName.touched" class="text-danger small">
+                        <div *ngIf="lastName.errors && lastName.errors['required']">This is a required field!</div>
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example3">Password</label>
+                    <input type="password" id="form2Example3" class="form-control" placeholder="password"  name="password" #password="ngModel" required ngModel/> <!--  #password="ngModel" -->
+                    <div *ngIf="password.touched" class="text-danger small">
+                        <div *ngIf="password.errors && password.errors['required']">This is a required field!</div>
+                    </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example4">Confirm Password</label>
+                    <input type="password" id="form2Example4" class="form-control" placeholder="confirm password" name="confirm" required #confirm = "ngModel" ngModel required/>
+                    <div *ngIf="confirm.touched" class="text-danger small">
+                        <div *ngIf="confirm.value !== password.value">Password does not matched!</div>
+                    </div>
+                </div>        
+                <button type="button" class="btn btn-primary btn-block mb-4" [disabled]="registerForm.status == 'INVALID' || confirm.value !== password.value" (click)="onSubmit(registerForm)">Sign up</button> 
+        
+                <div class="text-center">
+                    <script src="https://accounts.google.com/gsi/client" async defer></script>
+                    <div id="g_id_onload"
+                        data-client_id="1031112571612-832rdgeadnbjjcne00rr20ocufb6tdno.apps.googleusercontent.com"
+                        data-login_uri="http://localhost:4200/auth/register"
+                        data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                        data-type="standard"
+                        data-size="small"
+                        data-theme="outline"
+                        data-text="sign_in_with"
+                        data-shape="rectangular"
+                        data-logo_alignment="left">
+                    </div>
+                <p>Already a member? <a routerLink="/auth/login" routerLinkActive="active" >Sign-in</a></p>
+                <p>or sign up with:</p>
+                <button type="button" class="btn btn-link btn-floating mx-1" (click)="loginWithFacebook()">
+                    <i class="fab fa-facebook-f"></i>
+                </button>
+            
+                <button type="button" class="btn btn-link btn-floating mx-1" (click)="loginWithGoogle()">
+                    <i class="fab fa-google"></i>
+                </button>
+                
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                </button>
+            
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
